@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import QuickStats from "@/components/QuickStats";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
@@ -12,6 +13,7 @@ export default function Page() {
     <main className="relative overflow-hidden">
       <Navbar />
       <Hero />
+      <QuickStats />
       <About />
       <Skills />
       <Experience />
