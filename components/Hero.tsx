@@ -4,7 +4,7 @@ import Container from "./Container";
 import { profile } from "@/data/profile";
 import Reveal from "./Reveal";
 import Badge from "./Badge";
-import { ArrowRight, Github, Sparkles } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -72,6 +72,19 @@ export default function Hero() {
                       <Github size={18} /> GitHub
                     </span>
                   </motion.a>
+
+                  <motion.a
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    href={profile.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-premium inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10 transition"
+                  >
+                    <span className="relative z-10 inline-flex items-center gap-2">
+                      <Linkedin size={18} /> LinkedIn
+                    </span>
+                  </motion.a>
                 </div>
               </Reveal>
             </div>
@@ -79,7 +92,7 @@ export default function Hero() {
             {/* Right (Foto solta, completa, sem efeitos) */}
             <div className="md:col-span-5">
               <Reveal delay={0.1}>
-                <div className="relative mx-auto w-full max-w-[290px]">
+                <div className="relative mx-auto w-full max-w-[280px]">
                   <Image
                     src="/me/profile.png"
                     alt="Foto de perfil"

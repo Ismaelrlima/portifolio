@@ -2,7 +2,7 @@
 
 import Container from "./Container";
 import { profile } from "@/data/profile";
-import { Github, Mail, MapPin } from "lucide-react";
+import { Github, Mail, Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
 
 const links = [
@@ -19,10 +19,10 @@ export default function Navbar() {
       <Container>
         <div className="flex items-center justify-between py-4">
           <a href="#" className="group flex items-center gap-3">
-            <div className="relative h-9 w-9 overflow-hidden rounded-xl border border-white/10 bg-white/5">
+            {/* <div className="relative h-9 w-9 overflow-hidden rounded-xl border border-white/10 bg-white/5">
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/40 via-fuchsia-500/20 to-cyan-400/20" />
               <div className="absolute inset-0 noise" />
-            </div>
+            </div> */}
             <div className="leading-tight">
               <div className="text-sm font-semibold tracking-tight">{profile.name}</div>
               <div className="text-xs text-zinc-400">{profile.role}</div>
@@ -52,6 +52,20 @@ export default function Navbar() {
               <Github size={16} />
               <span className="hidden sm:inline">GitHub</span>
             </motion.a>
+
+            <motion.a
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              href={profile.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs text-zinc-200 hover:bg-white/10 transition"
+              aria-label="Abrir LinkedIn"
+            >
+              <Linkedin size={16} />
+              <span className="hidden sm:inline">LinkedIn</span>
+            </motion.a>
+
             <motion.a
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
@@ -61,10 +75,6 @@ export default function Navbar() {
               <Mail size={16} />
               <span className="hidden sm:inline">Email</span>
             </motion.a>
-            <div className="hidden lg:flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs text-zinc-300">
-              <MapPin size={16} />
-              {profile.location}
-            </div>
           </div>
         </div>
       </Container>

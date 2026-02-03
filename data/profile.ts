@@ -1,10 +1,18 @@
 export const profile = {
   name: "Ismael Ribeiro dos Santos Lima",
   role: "Analista de Dados | Business Intelligence | Ciência de Dados",
-  location: "Feira de Santana – Bahia",
+  location: "linkedin.com/in/ismael-ribeiro-dos-santos-lima",
   phone: "(75) 98152-7109",
+
+  // ✅ WhatsApp (somente números com DDI +55)
+  whatsapp: "5575981527109",
+
   email: "canais185@gmail.com",
   github: "https://github.com/Ismaelrlima?tab=repositories",
+
+  // ✅ LinkedIn
+  linkedin: "https://www.linkedin.com/in/ismael-ribeiro-dos-santos-lima/",
+
   headline:
     "Analista de Dados com +3 anos de experiência prática em análise, BI, automação e modelagem preditiva, atuando com ETL, SQL, Python, dashboards e geração de insights orientados ao negócio.",
   highlights: [
@@ -26,7 +34,7 @@ export const profile = {
       title: "Analista de Dados | Business Intelligence",
       company: "Moto Clube Honda",
       period: "Ago/2025 – Atual",
-      place: "Feira de Santana – BA",
+      place: "BA",
       bullets: [
         "Integração e tratamento de dados de múltiplas fontes (ETL), garantindo consistência e qualidade.",
         "Extração e análise em bancos relacionais (PostgreSQL), com foco em integridade e performance.",
@@ -63,53 +71,82 @@ export const profile = {
     }
   ],
   projects: [
-  {
-    name: "Monitoramento de Vendas Multicanal",
-    image: "/projects/vendas.png",
-    tags: ["Python", "Pandas", "Matplotlib", "Excel"],
-    description:
-      "Análise de receita, ticket médio e conversão por região, canal e loja.",
-    problem:
-      "Time sem visão consolidada por canal/loja e dependência de relatórios manuais, atrasando decisões.",
-    solution:
-      "Pipeline em Python para padronizar dados e gerar análises por canal/loja, com gráficos e exportação automatizada.",
-    impact:
-      "Acompanhamento mais rápido de KPIs, redução de retrabalho e identificação de oportunidades por canal/região.",
-    links: [{ label: "GitHub", href: "https://github.com/Ismaelrlima?tab=repositories" }]
-  },
-  {
-    name: "Redistribuição de Estoque (Multiloja)",
-    image: "/projects/estoque.png",
-    tags: ["Python", "NumPy", "Scikit-learn", "Estatística"],
-    description:
-      "Monitoramento e apoio à redistribuição entre lojas com estatística e ML.",
-    problem:
-      "Risco de ruptura em algumas lojas e excesso em outras, com decisão baseada em feeling.",
-    solution:
-      "Modelos e regras estatísticas para sugerir redistribuição, considerando giro, sazonalidade e demanda.",
-    impact:
-      "Melhor equilíbrio de estoque, redução de ruptura e uso mais eficiente do capital parado.",
-    links: [{ label: "GitHub", href: "https://github.com/Ismaelrlima?tab=repositories" }]
-  },
-  {
-    name: "Segmentação de Clientes e Produtos",
-    image: "/projects/clientes.png",
-    tags: ["SQL", "Power BI", "Insights"],
-    description:
-      "Segmentação e análise de produtos para campanhas e aumento de rentabilidade.",
-    problem:
-      "Dificuldade em identificar clientes de alto potencial e produtos com melhor margem/recorrência.",
-    solution:
-      "Consultas SQL + visualizações no Power BI para segmentar clientes e mapear produtos por performance.",
-    impact:
-      "Ações mais direcionadas, melhor uso de campanhas e aumento de conversão em ofertas estratégicas.",
-    links: [{ label: "GitHub", href: "https://github.com/Ismaelrlima?tab=repositories" }]
-  }
-],
+    {
+      name: "Monitoramento de Vendas Multicanal",
+      image: "/projects/vendas.png",
+      tags: ["Python", "Pandas", "Matplotlib", "Excel"],
+      description: "Análise de receita, ticket médio e conversão por região, canal e loja.",
+      problem:
+        "Time sem visão consolidada por canal/loja e dependência de relatórios manuais, atrasando decisões.",
+      solution:
+        "Pipeline em Python para padronizar dados e gerar análises por canal/loja, com gráficos e exportação automatizada.",
+      impact:
+        "Acompanhamento mais rápido de KPIs, redução de retrabalho e identificação de oportunidades por canal/região.",
+      links: [{ label: "GitHub", href: "https://github.com/Ismaelrlima?tab=repositories" }]
+    },
+    {
+      name: "Redistribuição de Estoque (Multiloja)",
+      image: "/projects/estoque.png",
+      tags: ["Python", "NumPy", "Scikit-learn", "Estatística"],
+      description: "Monitoramento e apoio à redistribuição entre lojas com estatística e ML.",
+      problem:
+        "Risco de ruptura em algumas lojas e excesso em outras, com decisão baseada em feeling.",
+      solution:
+        "Modelos e regras estatísticas para sugerir redistribuição, considerando giro, sazonalidade e demanda.",
+      impact:
+        "Melhor equilíbrio de estoque, redução de ruptura e uso mais eficiente do capital parado.",
+      links: [{ label: "GitHub", href: "https://github.com/Ismaelrlima?tab=repositories" }]
+    },
+    {
+      name: "Segmentação de Clientes e Produtos",
+      image: "/projects/clientes.png",
+      tags: ["SQL", "Power BI", "Insights"],
+      description: "Segmentação e análise de produtos para campanhas e aumento de rentabilidade.",
+      problem:
+        "Dificuldade em identificar clientes de alto potencial e produtos com melhor margem/recorrência.",
+      solution:
+        "Consultas SQL + visualizações no Power BI para segmentar clientes e mapear produtos por performance.",
+      impact:
+        "Ações mais direcionadas, melhor uso de campanhas e aumento de conversão em ofertas estratégicas.",
+      links: [{ label: "GitHub", href: "https://github.com/Ismaelrlima?tab=repositories" }]
+    },
+
+    // ✅ NOVOS PROJETOS (links para posts do LinkedIn)
+    {
+      name: "Projeto (Post no LinkedIn) — Case 01",
+      image: "/projects/linkedin-1.png",
+      tags: ["LinkedIn", "Case", "Dados"],
+      description: "Post com demonstração de projeto e resultados.",
+      problem: "Compartilhar um case e aprendizados do projeto.",
+      solution: "Publicação detalhando contexto, solução e insights.",
+      impact: "Visibilidade do trabalho e documentação do case.",
+      links: [
+        {
+          label: "Ver no LinkedIn",
+          href: "https://www.linkedin.com/feed/update/urn:li:activity:7421656780725772288/"
+        }
+      ]
+    },
+    {
+      name: "Projeto (Post no LinkedIn) — Case 02",
+      image: "/projects/linkedin-2.png",
+      tags: ["LinkedIn", "Case", "BI"],
+      description: "Post com análise/visualização e insights do projeto.",
+      problem: "Apresentar o resultado do projeto em formato público.",
+      solution: "Publicação com destaque para métricas e aprendizados.",
+      impact: "Portfólio público reforçado com prova social.",
+      links: [
+        {
+          label: "Ver no LinkedIn",
+          href: "https://www.linkedin.com/feed/update/urn:li:activity:7394809584554590208/"
+        }
+      ]
+    }
+  ],
   education: [
     {
       course: "Tecnólogo em Análise e Desenvolvimento de Sistemas",
-      school: "Centro Universitário UNIFAN – Feira de Santana/BA",
+      school: "Centro Universitário UNIFAN – BA",
       period: "Conclusão: 2025 (Nota MEC 5)"
     },
     {

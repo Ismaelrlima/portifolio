@@ -45,7 +45,11 @@ function ProjectModal({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [onClose]);
 
-  const github = project.links?.[0]?.href;
+  // Link principal (GitHub OU LinkedIn)
+  const primaryLink = project.links?.[0]?.href;
+  const isLinkedIn = (primaryLink ?? "").includes("linkedin.com");
+  const primaryLabel = isLinkedIn ? "Ver no LinkedIn" : "Ver no GitHub";
+
   const id = project.name.replace(/\s+/g, "-").toLowerCase();
 
   return (
@@ -71,7 +75,9 @@ function ProjectModal({
           {/* Shared layout container */}
           <motion.div
             layoutId={`card-${id}`}
-            className="glass relative w-full max-w-4xl overflow-hidden rounded-3xl shadow-glow max-h-[90vh] overflow-y-auto"
+            className="glass relative w-full max-w-4xl rounded-3xl shadow-glow
+                       h-[92dvh] md:h-auto md:max-h-[90vh]
+                       overflow-y-auto overscroll-contain"
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* Top bar */}
@@ -85,16 +91,16 @@ function ProjectModal({
 
               <button
                 onClick={onClose}
-                className="btn-premium inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-xs text-zinc-200 hover:bg-white/10 transition"
+                className="btn-premium inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-zinc-200 hover:bg-white/10 transition"
               >
-                <span className="relative z-10 inline-flex items-center gap-2">
-                  <X size={16} /> Fechar
-                </span>
+                <X size={26} className="mr-2" />
+                Fechar
               </button>
+
             </div>
 
             {/* Content */}
-            <div className="grid gap-6 p-5 md:grid-cols-12 md:p-6">
+            <div className="grid gap-6 p-5 pb-8 md:grid-cols-12 md:p-6">
               {/* Image */}
               <div className="md:col-span-7">
                 <motion.div
@@ -106,7 +112,7 @@ function ProjectModal({
                     alt={`Preview do projeto: ${project.name}`}
                     width={1600}
                     height={900}
-                    className="h-[220px] w-full object-cover sm:h-[280px] md:h-[360px]"
+                    className="h-[180px] w-full object-cover sm:h-[240px] md:h-[360px]"
                     priority
                   />
                 </motion.div>
@@ -167,14 +173,15 @@ function ProjectModal({
                   </div>
 
                   <div className="mt-1 flex flex-wrap gap-2">
-                    {github ? (
+                    {primaryLink ? (
                       <a
-                        href={github}
+                        href={primaryLink}
                         target="_blank"
+                        rel="noreferrer"
                         className="btn-premium inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-black hover:opacity-90 transition"
                       >
                         <span className="relative z-10 inline-flex items-center gap-2">
-                          Ver no GitHub <ArrowUpRight size={18} />
+                          {primaryLabel} <ArrowUpRight size={18} />
                         </span>
                       </a>
                     ) : null}
@@ -284,10 +291,7 @@ export default function Projects() {
 
           <AnimatePresence>
             {selected ? (
-              <ProjectModal
-                project={selected}
-                onClose={() => setSelected(null)}
-              />
+              <ProjectModal project={selected} onClose={() => setSelected(null)} />
             ) : null}
           </AnimatePresence>
         </LayoutGroup>
