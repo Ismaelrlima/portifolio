@@ -76,7 +76,6 @@ export default function Hero() {
               </Reveal>
             </div>
 
-<<<<<<< HEAD
             {/* Right (Foto solta, completa, sem efeitos) */}
             <div className="md:col-span-5">
               <Reveal delay={0.1}>
@@ -91,57 +90,21 @@ export default function Hero() {
                   />
 
                   {/* Nome e cargo (clean) */}
-                  {/*<div className="mt-4 text-center">
-                    <div className="text-lg font-semibold tracking-tight text-zinc-100">
-                      {profile.name}
-                    </div>
-                    <div className="mt-1 text-sm text-zinc-400">{profile.role}</div>
-=======
-            {/* Right (Foto clean, sem card) */}
-            <div className="md:col-span-5">
-              <Reveal delay={0.1}>
-                <div className="relative mx-auto w-full max-w-sm">
-                  {/* Glow sutil atrás da foto */}
-                  <div className="absolute -inset-8 -z-10 rounded-[48px] bg-gradient-to-br from-indigo-500/20 via-fuchsia-500/15 to-cyan-400/10 blur-2xl" />
-
-                  {/* Moldura natural da foto */}
-                  <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/5 shadow-glow">
-                    <div className="relative h-[340px] w-full sm:h-[380px] md:h-[420px]">
-                      <Image
-                        src="/me/profile.png"
-                        alt="Foto de perfil"
-                        fill
-                        className="object-cover"
-                        priority
-                      />
-                      {/* overlay bem leve para dar acabamento */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
-                    </div>
-                  </div>
-
-                  {/* Nome e cargo (clean) */}
                   <div className="mt-4 text-center">
                     <div className="text-lg font-semibold tracking-tight text-zinc-100">
                       {profile.name}
                     </div>
-                    <div className="mt-1 text-sm text-zinc-400">
-                      {profile.role}
-                    </div>
->>>>>>> 99b397a5ec9850a55c5abfbc412837fdddeaa9e1
+                    <div className="mt-1 text-sm text-zinc-400">{profile.role}</div>
 
-                    <div className="mt-4 flex justify-center gap-2">
+                  {/*<div className="mt-4 flex justify-center gap-2">
                       <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-200">
                         {profile.email}
                       </span>
                       <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-200">
                         Python • SQL • BI • ML
                       </span>
-                    </div>
-<<<<<<< HEAD
-                  </div>*/}
-=======
+                    </div>*/}
                   </div>
->>>>>>> 99b397a5ec9850a55c5abfbc412837fdddeaa9e1
                 </div>
               </Reveal>
             </div>
