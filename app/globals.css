@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+html, body { height: 100%; }
+
+::selection { background: rgba(99, 102, 241, 0.35); }
+
+/* ✅ Fundo premium: mesh + profundidade (sem poluir) */
+.bg-mesh {
+  background:
+    radial-gradient(900px 520px at 15% 18%, rgba(99,102,241,.22), transparent 58%),
+    radial-gradient(820px 540px at 85% 22%, rgba(217,70,239,.16), transparent 60%),
+    radial-gradient(900px 560px at 50% 85%, rgba(34,211,238,.12), transparent 60%),
+    radial-gradient(700px 460px at 50% 50%, rgba(255,255,255,.05), transparent 65%),
+    linear-gradient(180deg, rgba(0,0,0,1), rgba(0,0,0,.92));
+}
+
+/* ✅ Grade sutil */
+.bg-grid-soft {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0);
+  background-size: 30px 30px;
+  opacity: .16;
+}
+
+/* ✅ Vinheta pra legibilidade */
+.vignette {
+  background:
+    radial-gradient(circle at 50% 40%, rgba(255,255,255,.05), transparent 55%),
+    radial-gradient(circle at 50% 50%, transparent 30%, rgba(0,0,0,.82) 72%);
+}
+
+/* ✅ Grain premium */
+.noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: 0.35;
+}
+
+.glass {
+  background: rgba(12, 12, 16, 0.52);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.shadow-glow {
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 30px 80px rgba(0,0,0,0.55);
+}
+
+/* ✅ Botão premium com brilho roxo/azul suave */
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.btn-premium::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(90deg,
+    rgba(168,85,247,0.0),
+    rgba(168,85,247,0.55),
+    rgba(99,102,241,0.55),
+    rgba(168,85,247,0.0)
+  );
+  opacity: 0;
+  filter: blur(12px);
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+
+.btn-premium:hover::before {
+  opacity: 1;
+  animation: sheen 1.6s ease-in-out infinite;
+}
+
+@keyframes sheen {
+  0% { transform: translateX(-20%); }
+  50% { transform: translateX(20%); }
+  100% { transform: translateX(-20%); }
+}
+
+/* Acessibilidade */
+a { outline: none; }
+a:focus-visible {
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.45);
+  border-radius: 12px;
+}
+
+/* ✅ Hover roxo premium para cards de projeto */
+.project-hover {
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.project-hover::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(600px 260px at 30% 10%, rgba(168,85,247,.28), transparent 55%),
+              radial-gradient(520px 240px at 80% 60%, rgba(99,102,241,.22), transparent 60%);
+  opacity: 0;
+  transition: opacity 260ms ease;
+  pointer-events: none;
+}
+
+.project-hover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(168,85,247,0.0);
+  transition: border-color 260ms ease;
+  pointer-events: none;
+}
+
+.project-hover:hover::before {
+  opacity: 1;
+}
+
+.project-hover:hover::after {
+  border-color: rgba(168,85,247,0.35);
+}
