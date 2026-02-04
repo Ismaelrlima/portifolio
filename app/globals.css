@@ -7,7 +7,12 @@ html, body { height: 100%; }
 
 ::selection { background: rgba(99, 102, 241, 0.35); }
 
-/* ✅ Fundo premium: mesh + profundidade (sem poluir) */
+/* ✅ Otimização: will-change para avisar o navegador sobre animações */
+.will-change-transform {
+  will-change: transform;
+}
+
+/* ✅ Fundo premium: mesh + profundidade */
 .bg-mesh {
   background:
     radial-gradient(900px 520px at 15% 18%, rgba(99,102,241,.22), transparent 58%),
@@ -17,31 +22,40 @@ html, body { height: 100%; }
     linear-gradient(180deg, rgba(0,0,0,1), rgba(0,0,0,.92));
 }
 
-/* ✅ Grade sutil */
 .bg-grid-soft {
   background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0);
   background-size: 30px 30px;
   opacity: .16;
 }
 
-/* ✅ Vinheta pra legibilidade */
 .vignette {
   background:
     radial-gradient(circle at 50% 40%, rgba(255,255,255,.05), transparent 55%),
     radial-gradient(circle at 50% 50%, transparent 30%, rgba(0,0,0,.82) 72%);
+  pointer-events: none; /* Garante que não bloqueie cliques */
 }
 
-/* ✅ Grain premium */
 .noise {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
   opacity: 0.35;
+  pointer-events: none;
 }
 
+/* ✅ GRANDE OTIMIZAÇÃO: 
+   Em celulares, usamos apenas cor sólida com transparência.
+   O blur só é ativado em telas médias (md) para cima.
+*/
 .glass {
-  background: rgba(12, 12, 16, 0.52);
+  background: rgba(12, 12, 16, 0.85); /* Mais escuro/sólido no mobile para leitura */
   border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(14px);
+}
+
+@media (min-width: 768px) {
+  .glass {
+    background: rgba(12, 12, 16, 0.52);
+    backdrop-filter: blur(14px); /* Blur pesado só no desktop */
+  }
 }
 
 .shadow-glow {
@@ -50,11 +64,10 @@ html, body { height: 100%; }
     0 30px 80px rgba(0,0,0,0.55);
 }
 
-/* ✅ Botão premium com brilho roxo/azul suave */
 .btn-premium {
   position: relative;
   overflow: hidden;
-  transform: translateZ(0);
+  transform: translateZ(0); /* Força GPU */
 }
 
 .btn-premium::before {
@@ -84,14 +97,12 @@ html, body { height: 100%; }
   100% { transform: translateX(-20%); }
 }
 
-/* Acessibilidade */
 a { outline: none; }
 a:focus-visible {
   box-shadow: 0 0 0 3px rgba(99,102,241,0.45);
   border-radius: 12px;
 }
 
-/* ✅ Hover roxo premium para cards de projeto */
 .project-hover {
   position: relative;
   overflow: hidden;
@@ -126,3 +137,224 @@ a:focus-visible {
 .project-hover:hover::after {
   border-color: rgba(168,85,247,0.35);
 }
+
+@keyframes blob-float {
+  0% { transform: translate(0, 0) rotate(0deg)r32w1q  \ TFGRGE  \; }
+  50% { transform: translate(0, 20px) rotate(10deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Utilitários para as bolhas */
+.blob-base {
+  position: absolute;
+  border-radius: 50%;
+  /* O segredo: mix-blend-mode faz as cores se misturarem bonitas sem processamento pesado */
+  mix-blend-mode: screen; 
+  filter: opacity(0.4); /* Transparência simples */
+  will-change: transform; /* Avisa o navegador para usar a GPU */
+}
+
+/* Cores específicas do seu tema */
+.blob-indigo {
+  background: radial-gradient(circle, rgba(99,102,241, 0.8) 0%, rgba(99,102,241, 0) 70%);
+}
+.blob-fuchsia {
+  background: radial-gradient(circle, rgba(217,70,239, 0.8) 0%, rgba(217,70,239, 0) 70%);
+}
+.blob-cyan {
+  background: radial-gradient(circle, rgba(34,211,238, 0.8) 0%, rgba(34,211,238, 0) 70%);
+}
+
+/* Animações com tempos diferentes para parecer aleatório */
+.animate-blob-1 { animation: blob-spin 20s infinite ease-in-out alternate; }
+.animate-blob-2 { animation: blob-spin 25s infinite ease-in-out alternate-reverse; }
+.animate-blob-3 { animation: blob-float 15s infinite ease-in-out; }
+
+/* ... dentro do seu globals.css ... */
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-20px) translateX(10px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.5; }
+}
+
+.network-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+
+/* ... dentro do seu globals.css ... */
+
+@keyframes drift-slow {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(5%, 2%, 0) rotate(2deg); }
+  100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+}
+
+@keyframes drift-reverse {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(-3%, -5%, 0) rotate(-3deg); }
+  100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+}
+
+.data-glow {
+  position: absolute;
+  filter: blur(100px);
+  border-radius: 50%;
+  opacity: 0.15; /* Sutil e profissional */
+  will-change: transform;
+}
+
+/* =========================
+   Data Background (leve + profissional)
+   ========================= */
+
+.data-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background: #020205;
+}
+
+/* PONTOS (remete a dados) */
+.data-bg__dots {
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.22) 1px, transparent 1.6px);
+  background-size: 22px 22px;
+  animation: dots-drift 18s linear infinite;
+  will-change: background-position;
+  transform: translateZ(0);
+}
+
+/* GRID técnico bem sutil */
+.data-bg__grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.22) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse at center, black 45%, transparent 78%);
+}
+
+/* REDE (SVG) */
+.data-bg__net {
+  position: absolute;
+  inset: 0;
+  opacity: 0.7;
+  filter: blur(0px);
+}
+
+/* Linhas com “fluxo” (dash animado) */
+.data-bg__net .net-lines line {
+  stroke: rgba(56, 189, 248, 0.22); /* cyan */
+  stroke-width: 1.2;
+  stroke-dasharray: 6 10;
+  animation: dash-flow 3.8s linear infinite;
+}
+
+/* Nós com glow */
+.data-bg__net .net-nodes circle {
+  fill: rgba(99, 102, 241, 0.65); /* indigo */
+  filter: drop-shadow(0 0 10px rgba(56,189,248,0.22));
+  animation: node-pulse 3.6s ease-in-out infinite;
+}
+
+/* Faixa de fluxo de dados (bem sutil) */
+.data-bg__flow {
+  position: absolute;
+  inset: -30%;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(34,211,238,0.10), transparent 55%),
+    radial-gradient(circle at 70% 60%, rgba(99,102,241,0.10), transparent 60%),
+    conic-gradient(from 180deg at 50% 50%, rgba(217,70,239,0.06), transparent 40%, rgba(34,211,238,0.06));
+  filter: blur(50px);
+  opacity: 0.85;
+  animation: flow-rotate 22s linear infinite;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Scanline discreta (efeito “monitor/dados”) */
+.data-bg__scanline {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255,255,255,0.04),
+    transparent
+  );
+  height: 220px;
+  top: -220px;
+  opacity: 0.28;
+  animation: scanline 7.5s linear infinite;
+  mix-blend-mode: overlay;
+}
+
+/* Vinheta pra foco no conteúdo */
+.data-bg__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.65) 100%);
+}
+
+/* Animações */
+@keyframes dots-drift {
+  0%   { background-position: 0px 0px; }
+  100% { background-position: 120px 80px; }
+}
+
+@keyframes dash-flow {
+  0%   { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -32; }
+}
+
+@keyframes node-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50%      { transform: scale(1.12); opacity: 1; }
+}
+
+@keyframes flow-rotate {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.04); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes scanline {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(calc(100vh + 440px)); }
+}
+
+/* Respeita acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  .data-bg__dots,
+  .data-bg__net .net-lines line,
+  .data-bg__net .net-nodes circle,
+  .data-bg__flow,
+  .data-bg__scanline {
+    animation: none !important;
+  }
+}
+
+/* Mobile: reduz camadas por performance */
+@media (max-width: 768px) {
+  .data-bg__scanline { display: none; }
+  .data-bg__grid { opacity: 0.04; }
+  .data-bg__dots { opacity: 0.18; }
+  .data-bg__net { opacity: 0.55; }
+}
+
