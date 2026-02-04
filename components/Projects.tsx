@@ -213,7 +213,7 @@ export default function Projects() {
         <SectionTitle
           eyebrow="projetos"
           title="Projetos (case study)"
-          subtitle="Passe o mouse para ver o glow roxo. Clique para abrir com transição suave."
+          /*subtitle="Passe o mouse para ver o glow roxo. Clique para abrir com transição suave."*/
         />
 
         <LayoutGroup>

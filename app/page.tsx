@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import QuickStats from "@/components/QuickStats";
+import Hero from "@/components/Hero"; 
+import QuickStatsCards from "@/components/QuickStats";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
@@ -33,11 +33,10 @@ export default function Page() {
       <div className={isLoading ? "invisible h-screen overflow-hidden" : "visible"}>
         <Navbar />
         <Hero />
-        <QuickStats />
         <About />
         <Skills />
-        <Experience />
         <Projects />
+        <Experience />
         <Contact />
         <Footer />
       </div>
