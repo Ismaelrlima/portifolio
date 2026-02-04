@@ -17,8 +17,6 @@ const techs: Tech[] = [
   { name: "PostgreSQL", icon: <SiPostgresql /> },
   { name: "MySQL", icon: <SiMysql /> },
   { name: "MongoDB", icon: <SiMongodb /> },
-
-  // ✅ Power BI via imagem (para evitar erro de export)
   {
     name: "Power BI",
     icon: (
@@ -33,7 +31,6 @@ const techs: Tech[] = [
       </span>
     )
   },
-
   { name: "Selenium", icon: <SiSelenium /> },
   { name: "n8n", icon: <SiN8N /> },
   { name: "Jupyter", icon: <SiJupyter /> },
@@ -52,13 +49,14 @@ export default function TechStrip() {
       </div>
 
       <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-white/5">
+        {/* ✅ OTIMIZAÇÃO: will-change-transform aplicado aqui */}
         <motion.div
-          className="flex gap-6 px-5 py-4"
+          className="flex gap-6 px-5 py-4 will-change-transform"
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 22, ease: "linear", repeat: Infinity }}
+          transition={{ duration: 30, ease: "linear", repeat: Infinity }} // Aumentei um pouco a duração para ser mais suave
         >
           {[...techs, ...techs].map((t, idx) => (
-            <div key={`${t.name}-${idx}`} className="group flex items-center gap-2">
+            <div key={`${t.name}-${idx}`} className="group flex items-center gap-2 flex-shrink-0">
               <span className="text-lg text-zinc-200/80 group-hover:text-white transition">
                 {t.icon}
               </span>
