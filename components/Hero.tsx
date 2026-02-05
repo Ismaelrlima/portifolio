@@ -21,7 +21,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="hero" className="relative w-full">
+    <section id="hero" className="relative z-10 w-full">
       <Container>
         <div className="min-h-[100dvh] flex items-center justify-center py-20">
           <div className="w-full max-w-5xl text-center">
