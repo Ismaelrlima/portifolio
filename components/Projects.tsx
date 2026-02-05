@@ -22,169 +22,95 @@ function useLockBodyScroll(locked: boolean) {
     if (!locked) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
-    };
+    return () => { document.body.style.overflow = prev; };
   }, [locked]);
 }
 
-function ProjectModal({
-  project,
-  onClose
-}: {
-  project: Project;
-  onClose: () => void;
-}) {
+function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
   useLockBodyScroll(true);
-
-  useEffect(() => {
-    function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose();
-    }
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [onClose]);
 
   const primaryLink = project.links?.[0]?.href;
   const isLinkedIn = (primaryLink ?? "").includes("linkedin.com");
   const primaryLabel = isLinkedIn ? "Ver no LinkedIn" : "Ver no GitHub";
-
   const id = project.name.replace(/\s+/g, "-").toLowerCase();
 
   return (
     <AnimatePresence>
-      <motion.div
-        className="fixed inset-0 z-[60]"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
-        <motion.button
-          aria-label="Fechar modal"
-          className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+      <motion.div className="fixed inset-0 z-[60]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+        <motion.button 
+          className="absolute inset-0 bg-black/80 backdrop-blur-md" 
           onClick={onClose}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
         />
 
         <div className="absolute inset-0 flex items-center justify-center p-4 md:p-8">
           <motion.div
             layoutId={`card-${id}`}
-            className="glass relative w-full max-w-4xl rounded-3xl shadow-glow
-                       h-[92dvh] md:h-auto md:max-h-[90vh]
-                       overflow-y-auto overscroll-contain"
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="glass relative w-full max-w-4xl rounded-3xl shadow-glow h-[92dvh] md:h-auto md:max-h-[90vh] overflow-y-auto overscroll-contain"
           >
             <div className="flex items-start justify-between gap-3 border-b border-white/10 p-5 md:p-6">
               <motion.div layoutId={`title-${id}`}>
                 <div className="text-sm text-zinc-400">Case study</div>
-                <div className="mt-1 text-xl font-semibold tracking-tight">
-                  {project.name}
-                </div>
+                <div className="mt-1 text-xl font-semibold tracking-tight">{project.name}</div>
               </motion.div>
 
-              <button
+              <motion.button
+                whileTap={{ scale: 0.95 }}
                 onClick={onClose}
-                className="btn-premium inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-zinc-200 hover:bg-white/10 transition"
+                className="btn-premium flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold text-zinc-200"
               >
-                <X size={26} className="mr-2" />
-                Fechar
-              </button>
+                <span><X size={20} /></span> <span>Fechar</span>
+              </motion.button>
             </div>
 
             <div className="grid gap-6 p-5 pb-8 md:grid-cols-12 md:p-6">
               <div className="md:col-span-7">
                 <motion.div
                   layoutId={`image-${id}`}
-                  className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+                  className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/50"
                 >
                   <Image
                     src={project.image ?? "/projects/placeholder.png"}
-                    alt={`Preview do projeto: ${project.name}`}
+                    alt={project.name}
                     width={1600}
                     height={900}
-                    /* ALTERAÇÃO AQUI: object-contain e h-auto para não cortar a imagem */
+                    /* IMAGEM SEM CORTE: object-contain e h-auto */
                     className="h-auto max-h-[50vh] w-full object-contain md:max-h-[60vh]"
                     priority
                   />
                 </motion.div>
-
-                {project.tags?.length ? (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {project.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-200"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                ) : null}
+                
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.tags?.map(t => (
+                    <span key={t} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
 
-              <div className="md:col-span-5">
-                <div className="space-y-3">
-                  {project.description ? (
-                    <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                      <div className="text-xs uppercase tracking-[0.35em] text-zinc-400">
-                        Resumo
-                      </div>
-                      <p className="mt-2 text-sm leading-relaxed text-zinc-300">
-                        {project.description}
-                      </p>
-                    </div>
-                  ) : null}
-
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <div className="text-xs uppercase tracking-[0.35em] text-zinc-400">
-                      Problema
-                    </div>
-                    <p className="mt-2 text-sm leading-relaxed text-zinc-300">
-                      {project.problem ?? "—"}
-                    </p>
+              <div className="md:col-span-5 space-y-4">
+                {[
+                  { label: "Problema", text: project.problem },
+                  { label: "Solução", text: project.solution },
+                  { label: "Impacto", text: project.impact }
+                ].map(item => (
+                  <div key={item.label} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <div className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold">{item.label}</div>
+                    <p className="mt-2 text-sm leading-relaxed text-zinc-300">{item.text ?? "—"}</p>
                   </div>
+                ))}
 
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <div className="text-xs uppercase tracking-[0.35em] text-zinc-400">
-                      Solução
-                    </div>
-                    <p className="mt-2 text-sm leading-relaxed text-zinc-300">
-                      {project.solution ?? "—"}
-                    </p>
-                  </div>
-
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <div className="text-xs uppercase tracking-[0.35em] text-zinc-400">
-                      Impacto
-                    </div>
-                    <p className="mt-2 text-sm leading-relaxed text-zinc-300">
-                      {project.impact ?? "—"}
-                    </p>
-                  </div>
-
-                  <div className="mt-1 flex flex-wrap gap-2">
-                    {primaryLink ? (
-                      <a
-                        href={primaryLink}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="btn-premium inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-black hover:opacity-90 transition"
-                      >
-                        <span className="relative z-10 inline-flex items-center gap-2">
-                          {primaryLabel} <ArrowUpRight size={18} />
-                        </span>
-                      </a>
-                    ) : null}
-
-                    <button
-                      onClick={onClose}
-                      className="btn-premium inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10 transition"
+                <div className="pt-4 flex gap-3">
+                  {primaryLink && (
+                    <motion.a
+                      href={primaryLink}
+                      target="_blank"
+                      whileTap={{ scale: 0.98 }}
+                      className="btn-premium flex-1 inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-6 py-4 text-sm font-bold text-black"
                     >
-                      <span className="relative z-10">Fechar</span>
-                    </button>
-                  </div>
+                      <span>{primaryLabel}</span> <ArrowUpRight size={18} />
+                    </motion.a>
+                  )}
                 </div>
               </div>
             </div>
@@ -202,75 +128,38 @@ export default function Projects() {
   return (
     <section id="projetos" className="py-14 md:py-20">
       <Container>
-        <SectionTitle
-          eyebrow="projetos"
-          title="Projetos (case study)"
-        />
+        <SectionTitle eyebrow="projetos" title="Projetos em Destaque" />
 
         <LayoutGroup>
           <div className="grid gap-6 md:grid-cols-3">
             {projects.map((p, idx) => {
               const id = p.name.replace(/\s+/g, "-").toLowerCase();
-
               return (
                 <Reveal key={p.name} delay={idx * 0.05}>
                   <motion.button
                     onClick={() => setSelected(p)}
-                    className="text-left w-full"
-                    aria-label={`Abrir detalhes do projeto ${p.name}`}
+                    className="text-left w-full group"
                     whileTap={{ scale: 0.98 }}
                   >
-                    <motion.div
-                      layoutId={`card-${id}`}
-                      className="project-hover rounded-3xl"
-                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                    >
+                    <motion.div layoutId={`card-${id}`} className="project-hover rounded-3xl">
                       <Card>
-                        <motion.div
-                          layoutId={`image-${id}`}
-                          className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
-                        >
-                          <motion.div
-                            whileHover={{ scale: 1.03 }}
-                            transition={{ duration: 0.25 }}
-                          >
+                        <motion.div layoutId={`image-${id}`} className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                          <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.4 }}>
                             <Image
                               src={p.image ?? "/projects/placeholder.png"}
-                              alt={`Preview do projeto: ${p.name}`}
-                              width={1200}
-                              height={700}
-                              /* Mantemos object-cover nos cards para manter a grelha simétrica */
-                              className="h-44 w-full object-cover"
-                              priority={idx === 0}
+                              alt={p.name}
+                              width={800}
+                              height={450}
+                              className="h-48 w-full object-cover"
                             />
                           </motion.div>
                         </motion.div>
 
                         <div className="mt-5">
-                          <motion.div
-                            layoutId={`title-${id}`}
-                            className="text-sm font-semibold"
-                          >
-                            {p.name}
-                          </motion.div>
-
-                          <p className="mt-2 text-sm leading-relaxed text-zinc-300">
-                            {p.description}
-                          </p>
-
-                          <div className="mt-4 flex flex-wrap gap-2">
-                            {p.tags?.slice(0, 4).map((t) => (
-                              <span
-                                key={t}
-                                className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-200"
-                              >
-                                {t}
-                              </span>
-                            ))}
-                          </div>
-
-                          <div className="mt-5 inline-flex items-center gap-2 text-xs text-zinc-400">
-                            Clique para ver detalhes <ArrowUpRight size={16} />
+                          <motion.div layoutId={`title-${id}`} className="text-lg font-semibold">{p.name}</motion.div>
+                          <p className="mt-2 text-sm text-zinc-400 line-clamp-2">{p.description}</p>
+                          <div className="mt-5 flex items-center gap-2 text-xs font-bold text-indigo-300">
+                            DETALHES DO CASE <ArrowUpRight size={14} />
                           </div>
                         </div>
                       </Card>
@@ -282,9 +171,7 @@ export default function Projects() {
           </div>
 
           <AnimatePresence>
-            {selected ? (
-              <ProjectModal project={selected} onClose={() => setSelected(null)} />
-            ) : null}
+            {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
           </AnimatePresence>
         </LayoutGroup>
       </Container>

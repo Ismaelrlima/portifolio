@@ -5,115 +5,100 @@ import SectionTitle from "./SectionTitle";
 import Card from "./Card";
 import Reveal from "./Reveal";
 import { profile } from "@/data/profile";
-import { Mail, Phone, Github, Linkedin, MessageCircle } from "lucide-react";
+import { Mail, Github, Linkedin, MessageCircle, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Contact() {
   const whatsappMessage = "Olá, vim do portfólio e gostaria de saber mais do seu serviço.";
   const whatsappUrl = `https://wa.me/${profile.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
 
+  const contactMethods = [
+    {
+      icon: <MessageCircle size={22} />,
+      label: "WhatsApp",
+      value: "Mandar mensagem",
+      href: whatsappUrl,
+      color: "group-hover:text-green-400",
+    },
+    {
+      icon: <Mail size={22} />,
+      label: "Email",
+      value: profile.email,
+      href: `mailto:${profile.email}`,
+      color: "group-hover:text-indigo-400",
+    },
+    {
+      icon: <Linkedin size={22} />,
+      label: "LinkedIn",
+      value: "Conectar no perfil",
+      href: `https://linkedin.com/in/${profile.linkedin}`,
+      color: "group-hover:text-blue-400",
+    },
+    {
+      icon: <Github size={22} />,
+      label: "GitHub",
+      value: "Ver repositórios",
+      href: `https://github.com/${profile.github}`,
+      color: "group-hover:text-white",
+    },
+  ];
+
   return (
-    <section id="contato" className="py-14 md:py-20">
+    <section id="contato" className="py-12 md:py-16">
       <Container>
         <SectionTitle
           eyebrow="contato"
-          title="Vamos conversar"
-          subtitle="Se você busca alguém para acelerar análises, automatizar rotinas e transformar dados em estratégia, me chame."
+          title="Vamos projetar algo novo?"
+          subtitle="Disponível para consultorias e projetos pontuais."
         />
 
-        <div className="mt-10 grid gap-6 md:grid-cols-12">
-          {/* Caixa esquerda: infos */}
-          <div className="md:col-span-7">
-            <Reveal>
-              <Card>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <div className="flex items-center gap-2 text-sm font-semibold text-zinc-100">
-                      <Mail size={18} /> Email
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {contactMethods.map((method, idx) => (
+            <Reveal key={method.label} delay={idx * 0.1}>
+              <motion.a
+                href={method.href}
+                target="_blank"
+                rel="noreferrer"
+                whileHover={{ y: -4 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-premium group relative block h-full overflow-hidden rounded-[1.5rem] border border-white/5 bg-white/[0.02] p-px transition-all duration-500"
+              >
+                {/* Ajuste de altura: Removi p-6 do Card original (via CSS/Props se necessário) 
+                   ou forçando um padding menor aqui dentro 
+                */}
+                <Card>
+                  <div className="relative z-10 flex items-center gap-4 py-1"> 
+                    {/* Ícone menor e alinhado à esquerda para economizar altura vertical */}
+                    <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/5 text-zinc-400 transition-all duration-500 group-hover:bg-white/10 ${method.color}`}>
+                      {method.icon}
                     </div>
-                    <a
-                      className="mt-2 block text-sm text-zinc-300 hover:text-white transition"
-                      href={`mailto:${profile.email}`}
-                    >
-                      {profile.email}
-                    </a>
-                  </div>
 
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <div className="flex items-center gap-2 text-sm font-semibold text-zinc-100">
-                      <Phone size={18} /> Telefone
+                    <div className="flex flex-1 flex-col justify-center min-w-0">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-zinc-500 transition-colors group-hover:text-zinc-300">
+                          {method.label}
+                        </span>
+                        <ArrowRight size={12} className="opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 text-zinc-400" />
+                      </div>
+                      <div className="text-sm font-medium text-zinc-300 transition-colors group-hover:text-white truncate">
+                        {method.value}
+                      </div>
                     </div>
-                    <div className="mt-2 text-sm text-zinc-300">{profile.phone}</div>
                   </div>
-
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <div className="flex items-center gap-2 text-sm font-semibold text-zinc-100">
-                      <Linkedin size={18} /> LinkedIn
-                    </div>
-                    <a
-                      className="mt-2 block text-sm text-zinc-300 hover:text-white transition"
-                      href={profile.linkedin}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Abrir perfil
-                    </a>
-                  </div>
-
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <div className="flex items-center gap-2 text-sm font-semibold text-zinc-100">
-                      <Github size={18} /> GitHub
-                    </div>
-                    <a
-                      className="mt-2 block text-sm text-zinc-300 hover:text-white transition"
-                      href={profile.github}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Ver repositórios
-                    </a>
-                  </div>
-                </div>
-              </Card>
+                </Card>
+              </motion.a>
             </Reveal>
-          </div>
-
-          {/* Caixa direita: ações */}
-          <div className="md:col-span-5">
-            <Reveal delay={0.06}>
-              <Card>
-                <div className="text-sm font-semibold text-zinc-100">Ações rápidas</div>
-                <p className="mt-2 text-sm text-zinc-300">
-                  Quer conversar mais rápido? Me chame no WhatsApp ou envie um email.
-                </p>
-
-                <div className="mt-6 flex flex-col gap-3">
-                  <motion.a
-                    whileHover={{ y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-black hover:opacity-90 transition"
-                  >
-                    <MessageCircle size={18} />
-                    Enviar mensagem (WhatsApp)
-                  </motion.a>
-
-                  <motion.a
-                    whileHover={{ y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    href={`mailto:${profile.email}`}
-                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10 transition"
-                  >
-                    <Mail size={18} />
-                    Enviar email
-                  </motion.a>
-                </div>
-              </Card>
-            </Reveal>
-          </div>
+          ))}
         </div>
+
+        <Reveal delay={0.6}>
+          <div className="mt-12 flex flex-col items-center justify-center space-y-4 text-center">
+            <div className="h-px w-8 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
+            <p className="text-[10px] font-medium tracking-widest text-zinc-500 uppercase">
+              Remoto para o mundo
+            </p>
+          </div>
+        </Reveal>
       </Container>
     </section>
   );
