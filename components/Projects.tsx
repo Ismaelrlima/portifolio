@@ -45,7 +45,6 @@ function ProjectModal({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [onClose]);
 
-  // Link principal (GitHub OU LinkedIn)
   const primaryLink = project.links?.[0]?.href;
   const isLinkedIn = (primaryLink ?? "").includes("linkedin.com");
   const primaryLabel = isLinkedIn ? "Ver no LinkedIn" : "Ver no GitHub";
@@ -60,7 +59,6 @@ function ProjectModal({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        {/* Overlay */}
         <motion.button
           aria-label="Fechar modal"
           className="absolute inset-0 bg-black/70 backdrop-blur-sm"
@@ -70,9 +68,7 @@ function ProjectModal({
           exit={{ opacity: 0 }}
         />
 
-        {/* Modal wrapper */}
         <div className="absolute inset-0 flex items-center justify-center p-4 md:p-8">
-          {/* Shared layout container */}
           <motion.div
             layoutId={`card-${id}`}
             className="glass relative w-full max-w-4xl rounded-3xl shadow-glow
@@ -80,7 +76,6 @@ function ProjectModal({
                        overflow-y-auto overscroll-contain"
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           >
-            {/* Top bar */}
             <div className="flex items-start justify-between gap-3 border-b border-white/10 p-5 md:p-6">
               <motion.div layoutId={`title-${id}`}>
                 <div className="text-sm text-zinc-400">Case study</div>
@@ -96,12 +91,9 @@ function ProjectModal({
                 <X size={26} className="mr-2" />
                 Fechar
               </button>
-
             </div>
 
-            {/* Content */}
             <div className="grid gap-6 p-5 pb-8 md:grid-cols-12 md:p-6">
-              {/* Image */}
               <div className="md:col-span-7">
                 <motion.div
                   layoutId={`image-${id}`}
@@ -112,7 +104,8 @@ function ProjectModal({
                     alt={`Preview do projeto: ${project.name}`}
                     width={1600}
                     height={900}
-                    className="h-[180px] w-full object-cover sm:h-[240px] md:h-[360px]"
+                    /* ALTERAÇÃO AQUI: object-contain e h-auto para não cortar a imagem */
+                    className="h-auto max-h-[50vh] w-full object-contain md:max-h-[60vh]"
                     priority
                   />
                 </motion.div>
@@ -131,7 +124,6 @@ function ProjectModal({
                 ) : null}
               </div>
 
-              {/* Text */}
               <div className="md:col-span-5">
                 <div className="space-y-3">
                   {project.description ? (
@@ -213,7 +205,6 @@ export default function Projects() {
         <SectionTitle
           eyebrow="projetos"
           title="Projetos (case study)"
-          /*subtitle="Passe o mouse para ver o glow roxo. Clique para abrir com transição suave."*/
         />
 
         <LayoutGroup>
@@ -248,6 +239,7 @@ export default function Projects() {
                               alt={`Preview do projeto: ${p.name}`}
                               width={1200}
                               height={700}
+                              /* Mantemos object-cover nos cards para manter a grelha simétrica */
                               className="h-44 w-full object-cover"
                               priority={idx === 0}
                             />
