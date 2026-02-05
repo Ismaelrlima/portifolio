@@ -30,7 +30,7 @@ export default function Page() {
       {/* Renderizamos o conteúdo sempre, mas controlamos a visibilidade inicial 
          para o navegador já ir processando o layout por baixo do loader.
       */}
-      <div className={isLoading ? "invisible h-screen overflow-hidden" : "visible"}>
+      <div className={isLoading ? "invisible min-h-[100dvh] overflow-hidden" : "visible"}>
         <Navbar />
         <Hero />
         <About />

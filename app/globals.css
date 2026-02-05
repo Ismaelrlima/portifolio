@@ -3,8 +3,17 @@
 @tailwind utilities;
 
 :root { color-scheme: dark; }
-html, body { height: 100%; }
 
+html, body {
+  height: 100%;
+  min-height: 100dvh; /* viewport dinâmica no mobile */
+  margin: 0;
+  overflow-x: hidden; /* ✅ evita “vazamentos” laterais em mobile */
+}
+
+body {
+  background: #050816; /* evita aparecer preto "cru" quando sobrar área */
+}
 ::selection { background: rgba(99, 102, 241, 0.35); }
 
 /* ✅ Otimização: will-change para avisar o navegador sobre animações */
