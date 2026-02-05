@@ -18,6 +18,7 @@ export default function DataScienceBackground() {
 
     let nodes: Node[] = []
     let frame = 0
+    let tick = 0
 
     let vw = 0
     let vh = 0
@@ -29,9 +30,18 @@ export default function DataScienceBackground() {
       return { w, h }
     }
 
+    const lowPower = (() => {
+      const dm = (navigator as any).deviceMemory as number | undefined
+      const cores = navigator.hardwareConcurrency || 0
+      const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches
+      // heurística simples: pouca RAM/cores ou usuário prefere menos movimento
+      return !!reduced || (typeof dm === "number" && dm <= 4) || (cores > 0 && cores <= 4)
+    })()
+
     const createNodes = (w: number, h: number) => {
       const isMobile = w < 768
-      const count = isMobile ? 40 : 65
+      const base = isMobile ? 40 : 65
+      const count = lowPower ? Math.round(base * 0.7) : base
 
       nodes = Array.from({ length: count }).map(() => ({
         x: Math.random() * w,
@@ -81,71 +91,81 @@ export default function DataScienceBackground() {
     }
 
     const animate = () => {
+      // ✅ em aparelhos mais fracos, reduz um pouco o custo sem mudar a estética
+      if (lowPower) {
+        tick = (tick + 1) % 2
+        if (tick === 1) {
+          frame = requestAnimationFrame(animate)
+          return
+        }
+      }
+
       drawBackground()
 
       for (let i = 0; i < nodes.length; i++) {
-        const n = nodes[i]
-        n.x += n.vx
-        n.y += n.vy
+        const a = nodes[i]
 
-        if (n.x < 0 || n.x > vw) n.vx *= -1
-        if (n.y < 0 || n.y > vh) n.vy *= -1
+        a.x += a.vx
+        a.y += a.vy
+
+        if (a.x < 0 || a.x > vw) a.vx *= -1
+        if (a.y < 0 || a.y > vh) a.vy *= -1
 
         for (let j = i + 1; j < nodes.length; j++) {
-          const n2 = nodes[j]
-          const d = Math.hypot(n.x - n2.x, n.y - n2.y)
+          const b = nodes[j]
+          const dx = a.x - b.x
+          const dy = a.y - b.y
+          const dist = Math.sqrt(dx * dx + dy * dy)
 
-          if (d < 220) {
-            ctx.strokeStyle = `rgba(120,130,255,${(1 - d / 220) * 0.35})`
-            ctx.lineWidth = n.type === "hub" || n2.type === "hub" ? 1 : 0.6
-            ctx.setLineDash([4, 6])
+          const maxDist = a.type === "hub" || b.type === "hub" ? 170 : 120
+          if (dist < maxDist) {
+            const alpha = (1 - dist / maxDist) * (a.type === "hub" || b.type === "hub" ? 0.35 : 0.22)
+            ctx.strokeStyle = `rgba(140, 160, 255, ${alpha})`
+            ctx.lineWidth = a.type === "hub" || b.type === "hub" ? 1.3 : 1
             ctx.beginPath()
-            ctx.moveTo(n.x, n.y)
-            ctx.lineTo(n2.x, n2.y)
+            ctx.moveTo(a.x, a.y)
+            ctx.lineTo(b.x, b.y)
             ctx.stroke()
-            ctx.setLineDash([])
           }
         }
+      }
 
-        ctx.fillStyle =
-          n.type === "hub" ? "rgba(165,180,252,0.9)" : "rgba(99,102,241,0.7)"
-
+      // nodes
+      for (const n of nodes) {
         ctx.beginPath()
-        ctx.arc(n.x, n.y, n.type === "hub" ? 2.8 : 1.6, 0, Math.PI * 2)
+        ctx.fillStyle = n.type === "hub" ? "rgba(180, 200, 255, 0.9)" : "rgba(130, 150, 255, 0.65)"
+        ctx.arc(n.x, n.y, n.type === "hub" ? 2.1 : 1.6, 0, Math.PI * 2)
         ctx.fill()
       }
 
       frame = requestAnimationFrame(animate)
     }
 
-    // ✅ Debounce real (em vez de resize por “scroll” do visualViewport)
+    // resize debounced
     let t: number | null = null
     const requestResize = () => {
       if (t) window.clearTimeout(t)
-      t = window.setTimeout(() => {
-        resize()
-        t = null
-      }, 120)
+      t = window.setTimeout(resize, 120)
     }
 
     resize()
-    animate()
+    createNodes(vw, vh)
+    frame = requestAnimationFrame(animate)
 
     window.addEventListener("resize", requestResize)
-    window.visualViewport?.addEventListener("resize", requestResize)
 
     return () => {
       cancelAnimationFrame(frame)
       if (t) window.clearTimeout(t)
       window.removeEventListener("resize", requestResize)
-      window.visualViewport?.removeEventListener("resize", requestResize)
     }
   }, [])
 
   return (
-  <canvas
-    ref={canvasRef}
-    className="fixed inset-0 z-0 blur-[1.8px] scale-[1.03] pointer-events-none"
-  />
-)
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 -z-10 h-full w-full"
+      aria-hidden="true"
+    />
+  )
 }

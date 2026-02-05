@@ -7,18 +7,34 @@ import { profile } from "@/data/profile";
 import { ArrowRight, ChevronDown, Linkedin } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const NAV_OFFSET = 110;
+
+function smoothScrollToHash(hash: string) {
+  if (!hash.startsWith("#")) return;
+  const el = document.querySelector(hash);
+  if (!el) return;
+
+  const y = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+  window.scrollTo({ top: y, behavior: "smooth" });
+  history.replaceState(null, "", hash);
+}
+
 export default function Hero() {
   const [showArrow, setShowArrow] = useState(true);
 
   useEffect(() => {
-    const onScroll = () => {
-      setShowArrow(window.scrollY < 20);
-    };
-
+    const onScroll = () => setShowArrow(window.scrollY < 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const onAnchor =
+    (href: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (!href.startsWith("#")) return;
+      e.preventDefault();
+      smoothScrollToHash(href);
+    };
 
   return (
     <section id="hero" className="relative z-10 w-full">
@@ -35,7 +51,8 @@ export default function Hero() {
                 <span className="relative inline-block text-fuchsia-300 drop-shadow-[0_0_15px_rgba(240,171,252,0.6)]">
                   Machine Learning
                 </span>
-                <span className="inline">:</span> transformando dados em inteligência estratégica.
+                <span className="inline">:</span> transformando dados em
+                inteligência estratégica.
               </h1>
             </Reveal>
 
@@ -45,6 +62,7 @@ export default function Hero() {
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.98 }}
                   href="#projetos"
+                  onClick={onAnchor("#projetos")}
                   className="btn-premium inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-6 py-3 text-sm font-semibold text-black hover:opacity-90 transition"
                 >
                   Ver projetos <ArrowRight size={18} />
@@ -71,6 +89,7 @@ export default function Hero() {
           {showArrow && (
             <motion.a
               href="#sobre"
+              onClick={onAnchor("#sobre")}
               aria-label="Role para ver mais"
               className="pointer-events-auto"
               initial={{ opacity: 0, y: 8 }}

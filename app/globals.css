@@ -12,6 +12,15 @@ html, body { height: 100%; }
   will-change: transform;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px; /* compensa navbar fixa */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
 /* ✅ Fundo premium: mesh + profundidade */
 .bg-mesh {
   background:
