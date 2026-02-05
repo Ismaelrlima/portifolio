@@ -12,7 +12,6 @@ export default function Hero() {
 
   useEffect(() => {
     const onScroll = () => {
-      // some assim que rolar um pouquinho
       setShowArrow(window.scrollY < 20);
     };
 
@@ -22,20 +21,26 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="hero" className="relative">
+    <section id="hero" className="relative w-full">
       <Container>
-        <div className="min-h-[82vh] md:min-h-[88vh] flex items-center justify-center py-16">
-          <div className="w-full max-w-4xl text-center">
+        <div className="min-h-[100dvh] flex items-center justify-center py-20">
+          <div className="w-full max-w-5xl text-center">
             <Reveal>
-              <h1 className="text-4xl font-semibold tracking-tight md:text-6xl">
-                Transformo <span className="text-indigo-300">dados</span> em{" "}
-                <span className="text-fuchsia-300">decisões</span> — e decisões em{" "}
-                <span className="text-cyan-200">resultado</span>.
+              <h1 className="text-3xl font-semibold tracking-tight md:text-6xl px-4 leading-[1.2] max-w-4xl mx-auto">
+                Especialista em{" "}
+                <span className="relative inline-block text-indigo-300 drop-shadow-[0_0_15px_rgba(165,180,252,0.6)]">
+                  Analytics
+                </span>{" "}
+                &{" "}
+                <span className="relative inline-block text-fuchsia-300 drop-shadow-[0_0_15px_rgba(240,171,252,0.6)]">
+                  Machine Learning
+                </span>
+                <span className="inline">:</span> transformando dados em inteligência estratégica.
               </h1>
             </Reveal>
 
             <Reveal delay={0.12}>
-              <div className="mt-10 flex flex-wrap justify-center gap-3">
+              <div className="mt-10 flex flex-wrap justify-center gap-3 px-4">
                 <motion.a
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.98 }}
@@ -61,8 +66,7 @@ export default function Hero() {
         </div>
       </Container>
 
-      {/* Seta flutuante - ABSOLUTE (não trava a navbar) */}
-      <div className="pointer-events-none absolute bottom-2 left-0 right-0 z-40 flex justify-center">
+      <div className="pointer-events-none absolute bottom-10 left-0 right-0 z-40 flex justify-center">
         <AnimatePresence>
           {showArrow && (
             <motion.a

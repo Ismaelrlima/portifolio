@@ -71,7 +71,7 @@ export const profile = {
     }
   ],
   projects: [
-    {
+    /*{
       name: "Monitoramento de Vendas Multicanal",
       image: "/projects/vendas.png",
       tags: ["Python", "Pandas", "Matplotlib", "Excel"],
@@ -109,36 +109,36 @@ export const profile = {
       impact:
         "Ações mais direcionadas, melhor uso de campanhas e aumento de conversão em ofertas estratégicas.",
       links: [{ label: "GitHub", href: "https://github.com/Ismaelrlima?tab=repositories" }]
-    },
+    },*/
 
     // ✅ NOVOS PROJETOS (links para posts do LinkedIn)
     {
-      name: "Projeto (Post no LinkedIn) — Case 01",
-      image: "/projects/linkedin-1.png",
-      tags: ["LinkedIn", "Case", "Dados"],
-      description: "Post com demonstração de projeto e resultados.",
-      problem: "Compartilhar um case e aprendizados do projeto.",
-      solution: "Publicação detalhando contexto, solução e insights.",
-      impact: "Visibilidade do trabalho e documentação do case.",
-      links: [
-        {
-          label: "Ver no LinkedIn",
-          href: "https://www.linkedin.com/feed/update/urn:li:activity:7421656780725772288/"
-        }
-      ]
-    },
-    {
-      name: "Projeto (Post no LinkedIn) — Case 02",
-      image: "/projects/linkedin-2.png",
-      tags: ["LinkedIn", "Case", "BI"],
-      description: "Post com análise/visualização e insights do projeto.",
-      problem: "Apresentar o resultado do projeto em formato público.",
-      solution: "Publicação com destaque para métricas e aprendizados.",
-      impact: "Portfólio público reforçado com prova social.",
+      name: "Projeto Power BI – Meta Ads",
+      image: "/projects/bimeta.jpeg",
+      tags: ["Dados", "Power BI", "ETL", "Python", "SQL", "API", "CI/CD"],
+      description: "Dashboard analítico automatizado para monitoramento de performance de campanhas no Meta Ads.",
+      problem: "Necessidade de unificar dados de múltiplas fontes e garantir análises rápidas, confiáveis e contínuas para tomada de decisão em marketing.",
+      solution: "Pipeline ETL em Python integrando API do Meta, banco de dados central e planilhas, com modelagem em Star Schema e automação via Jenkins para entrega contínua no Power BI.",
+      impact: "Aumento da confiabilidade e velocidade das análises, suporte direto a decisões estratégicas do time e entrega de valor de negócio a partir de dados automatizados.",
       links: [
         {
           label: "Ver no LinkedIn",
           href: "https://www.linkedin.com/feed/update/urn:li:activity:7394809584554590208/"
+        }
+      ]
+    },
+    {
+      name: "Automação de Vendas via WhatsApp & Analytics",
+      image: "/projects/maya.jpeg",
+      tags: ["Python", "Automação", "n8n", "WhatsApp API", "IA", "CRM", "BI", "APIs"],
+      description: "Sistema inteligente de atendimento e vendas via WhatsApp com automação ponta a ponta e dashboards em tempo real.",
+      problem: "Processo de atendimento e vendas descentralizado, com alto esforço manual, baixa rastreabilidade dos dados e pouca visibilidade sobre performance comercial.",
+      solution: "Desenvolvimento de um bot de WhatsApp integrado a automações no n8n, Python e IA para triagem, validação e padronização de dados, integração com APIs externas, CRM e banco de dados, alimentando dashboards de BI em tempo real.",
+      impact: "Redução de erros manuais, aumento da eficiência do atendimento, maior produtividade dos vendedores e gestão orientada por dados em um ecossistema totalmente automatizado.",
+      links: [
+        {
+          label: "Ver no LinkedIn",
+          href: "https://www.linkedin.com/feed/update/urn:li:activity:7421656780725772288/"
         }
       ]
     }
