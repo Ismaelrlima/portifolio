@@ -31,14 +31,14 @@ export default function Contact() {
       icon: <Linkedin size={22} />,
       label: "LinkedIn",
       value: "Conectar no perfil",
-      href: `https://linkedin.com/in/${profile.linkedin}`,
+      href: `https://www.linkedin.com/in/ismael-ribeiro-dos-santos-lima/`,
       color: "group-hover:text-blue-400",
     },
     {
       icon: <Github size={22} />,
       label: "GitHub",
       value: "Ver repositórios",
-      href: `https://github.com/${profile.github}`,
+      href: `https://github.com/Ismaelrlima?tab=repositories`,
       color: "group-hover:text-white",
     },
   ];

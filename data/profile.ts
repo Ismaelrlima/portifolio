@@ -14,7 +14,7 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/ismael-ribeiro-dos-santos-lima/",
 
   headline:
-    "Analista de Dados com +3 anos de experiência prática em análise, BI, automação e modelagem preditiva, atuando com ETL, SQL, Python, dashboards e geração de insights orientados ao negócio.",
+    "Analista de Dados com +3 anos de experiência prática em análise, BI, automação e modelagem preditiva, atuando com ETL, SQL, Python, dashboards e generation de insights orientados ao negócio.",
   highlights: [
     "ETL e integração de múltiplas fontes (internas/externas)",
     "SQL (PostgreSQL/MySQL) e performance de consultas",
@@ -23,10 +23,11 @@ export const profile = {
     "Automação e pipelines via APIs (Meta/Google)"
   ],
   skills: {
-    "Python & Dados": ["Pandas", "NumPy", "Scikit-learn", "Matplotlib", "Seaborn", "Selenium"],
+    "Python & Dados": ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Selenium"],
     "Bancos de Dados": ["PostgreSQL", "MySQL", "MongoDB"],
+    "Ciência de Dados & ML": ["Scikit-learn", "Modelagem Preditiva", "Estatística", "Regressão/Classificação"],
     "BI & Analytics": ["Power BI", "KPIs", "Dashboards", "Storytelling"],
-    "Engenharia/Automação": ["ETL", "APIs", "Pipelines", "n8n", "SQLAlchemy"],
+    "Engenharia/Automação": ["ETL", "APIs", "Pipelines", "n8n", "SQLAlchemy","Apache Airflow","Jenkins (CI/CD)","PySpark"],
     "Dev & Colaboração": ["Git/GitHub", "Jupyter Notebooks", "Documentação"]
   },
   experience: [
