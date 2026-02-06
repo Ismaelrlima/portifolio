@@ -62,7 +62,7 @@ export default function About() {
                   </span>
 
                   <span className="block mt-4 text-zinc-300">
-                    Sou um Especialista em Data Analytics & Machine Learning Com mais de{" "}
+                    Sou um Especialista em Data Analytics & Machine Learning com mais de{" "}
                     <span className="text-zinc-100 font-semibold">
                       3 anos de experiência
                     </span>{" "}
