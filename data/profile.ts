@@ -27,7 +27,7 @@ export const profile = {
     "Bancos de Dados": ["PostgreSQL", "MySQL", "MongoDB"],
     "Ciência de Dados & ML": ["Scikit-learn", "Modelagem Preditiva", "Estatística", "Regressão/Classificação"],
     "BI & Analytics": ["Power BI", "KPIs", "Dashboards", "Storytelling"],
-    "Engenharia/Automação": ["ETL", "APIs", "Pipelines", "n8n", "SQLAlchemy","Apache Airflow","Jenkins (CI/CD)","PySpark"],
+    "Engenharia/Automação": ["ETL", "APIs", "Pipelines", "n8n", "SQLAlchemy", "Apache Airflow", "Jenkins (CI/CD)", "PySpark"],
     "Dev & Colaboração": ["Git/GitHub", "Jupyter Notebooks", "Documentação"]
   },
   experience: [
@@ -47,7 +47,7 @@ export const profile = {
     {
       title: "Estágio em Ciência de Dados",
       company: "Maria Bonita",
-      period: "Fev/2025 – Atual",
+      period: "Fev/2025 – Jul/2025",
       place: "Varejo (7+ filiais)",
       bullets: [
         "Análises personalizadas e insights acionáveis para decisões estratégicas das unidades.",

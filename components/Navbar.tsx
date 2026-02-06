@@ -7,8 +7,8 @@ import { Menu, X } from "lucide-react"; // Instale com: npm install lucide-react
 const links = [
   { href: "#sobre", label: "Sobre" },
   { href: "#skills", label: "Skills" },
-  { href: "#experiencia", label: "Experiência" },
   { href: "#projetos", label: "Projetos" },
+  { href: "#experiencia", label: "Experiência" },
   { href: "#contato", label: "Contato" },
 ];
 

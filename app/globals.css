@@ -4,33 +4,41 @@
 
 :root { color-scheme: dark; }
 
-html, body {
-  height: 100%;
-  min-height: 100dvh; /* viewport dinâmica no mobile */
-  margin: 0;
-  overflow-x: hidden; /* ✅ evita “vazamentos” laterais em mobile */
+html {
+  scroll-behavior: smooth !important;
+  scroll-padding-top: 110px;
+  /* ✅ Previne redimensionamento da área visível no iOS */
+  height: -webkit-fill-available;
+  overflow-x: hidden;
 }
 
 body {
-  background: #050816; /* evita aparecer preto "cru" quando sobrar área */
+  min-height: 100dvh;
+  margin: 0;
+  background: #050816;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  /* ✅ Impede que o fundo "desgrude" no topo ou fundo do iOS */
+  overscroll-behavior-y: none;
+  position: relative;
 }
+
+/* Garante que o canvas ignore qualquer movimento de rolagem */
+canvas {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  pointer-events: none;
+  backface-visibility: hidden;
+  transform: translate3d(0,0,0);
+}
+
 ::selection { background: rgba(99, 102, 241, 0.35); }
 
-/* ✅ Otimização: will-change para avisar o navegador sobre animações */
-.will-change-transform {
-  will-change: transform;
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 110px; /* compensa navbar fixa */
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-}
-
-/* ✅ Fundo premium: mesh + profundidade */
+/* --- Restante dos estilos mantidos --- */
 .bg-mesh {
   background:
     radial-gradient(900px 520px at 15% 18%, rgba(99,102,241,.22), transparent 58%),
@@ -72,15 +80,6 @@ html {
   }
 }
 
-.shadow-glow {
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.08),
-    0 30px 80px rgba(0,0,0,0.55);
-}
-
-/* ============================================================
-   BOTÃO PREMIUM ATUALIZADO (Efeito de Preenchimento + Scale)
-   ============================================================ */
 .btn-premium {
   position: relative;
   overflow: hidden;
@@ -89,7 +88,7 @@ html {
 }
 
 .btn-premium:hover {
-  transform: scale(1.04); /* Crescimento leve */
+  transform: scale(1.04);
   box-shadow: 0 0 25px rgba(168, 85, 247, 0.25);
 }
 
@@ -97,7 +96,6 @@ html {
   content: "";
   position: absolute;
   inset: 0;
-  /* Gradiente que preenche o fundo */
   background: linear-gradient(45deg, rgba(168, 85, 247, 0.25), rgba(99, 102, 241, 0.4));
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -105,19 +103,8 @@ html {
   pointer-events: none;
 }
 
-.btn-premium:hover::before {
-  opacity: 1;
-}
-
-/* Garante que o conteúdo (texto/ícone) fique acima do brilho */
-.btn-premium > * {
-  position: relative;
-  z-index: 10;
-}
-
-/* ============================================================
-   SEUS EFEITOS DE FUNDO (PRESERVADOS)
-   ============================================================ */
+.btn-premium:hover::before { opacity: 1; }
+.btn-premium > * { position: relative; z-index: 10; }
 
 .project-hover {
   position: relative;
@@ -170,37 +157,6 @@ html {
 .animate-blob-2 { animation: blob-spin 25s infinite ease-in-out alternate-reverse; }
 .animate-blob-3 { animation: blob-float 15s infinite ease-in-out; }
 
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-20px) translateX(10px); }
-}
-
-@keyframes pulse-soft {
-  0%, 100% { opacity: 0.2; }
-  50% { opacity: 0.5; }
-}
-
-.network-grid {
-  background-image: 
-    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-@keyframes drift-slow {
-  0% { transform: translate3d(0, 0, 0) rotate(0deg); }
-  50% { transform: translate3d(5%, 2%, 0) rotate(2deg); }
-  100% { transform: translate3d(0, 0, 0) rotate(0deg); }
-}
-
-.data-glow {
-  position: absolute;
-  filter: blur(100px);
-  border-radius: 50%;
-  opacity: 0.15;
-  will-change: transform;
-}
-
 .data-bg {
   position: fixed;
   inset: 0;
@@ -217,8 +173,6 @@ html {
   background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.22) 1px, transparent 1.6px);
   background-size: 22px 22px;
   animation: dots-drift 18s linear infinite;
-  will-change: background-position;
-  transform: translateZ(0);
 }
 
 .data-bg__grid {
@@ -247,37 +201,6 @@ html {
   animation: node-pulse 3.6s ease-in-out infinite;
 }
 
-.data-bg__flow {
-  position: absolute;
-  inset: -30%;
-  background:
-    radial-gradient(circle at 30% 40%, rgba(34,211,238,0.10), transparent 55%),
-    radial-gradient(circle at 70% 60%, rgba(99,102,241,0.10), transparent 60%),
-    conic-gradient(from 180deg at 50% 50%, rgba(217,70,239,0.06), transparent 40%, rgba(34,211,238,0.06));
-  filter: blur(50px);
-  opacity: 0.85;
-  animation: flow-rotate 22s linear infinite;
-  transform: translateZ(0);
-  will-change: transform;
-}
-
-.data-bg__scanline {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.04), transparent);
-  height: 220px;
-  top: -220px;
-  opacity: 0.28;
-  animation: scanline 7.5s linear infinite;
-  mix-blend-mode: overlay;
-}
-
-.data-bg__vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.65) 100%);
-}
-
 @keyframes dots-drift {
   0%   { background-position: 0px 0px; }
   100% { background-position: 120px 80px; }
@@ -291,28 +214,4 @@ html {
 @keyframes node-pulse {
   0%, 100% { transform: scale(1); opacity: 0.85; }
   50%      { transform: scale(1.12); opacity: 1; }
-}
-
-@keyframes flow-rotate {
-  0%   { transform: rotate(0deg) scale(1); }
-  50%  { transform: rotate(180deg) scale(1.04); }
-  100% { transform: rotate(360deg) scale(1); }
-}
-
-@keyframes scanline {
-  0%   { transform: translateY(0); }
-  100% { transform: translateY(calc(100vh + 440px)); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .data-bg__dots, .data-bg__net .net-lines line, .data-bg__net .net-nodes circle, .data-bg__flow, .data-bg__scanline {
-    animation: none !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .data-bg__scanline { display: none; }
-  .data-bg__grid { opacity: 0.04; }
-  .data-bg__dots { opacity: 0.18; }
-  .data-bg__net { opacity: 0.55; }
 }

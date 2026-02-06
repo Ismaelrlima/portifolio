@@ -47,6 +47,18 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         onClick={onClose}
       />
 
+      {/* Botão de fechar flutuante, posicionado em relação à tela inteira */}
+      <motion.button
+        onClick={onClose}
+        aria-label="Fechar modal"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0, opacity: 0 }}
+        className="absolute top-4 right-4 z-[70] flex items-center justify-center gap-2 rounded-full border border-white/10 bg-black/50 px-4 py-2 text-sm font-medium text-zinc-200 backdrop-blur-md transition-colors hover:bg-white/10 hover:text-white md:top-6 md:right-6"
+      >
+        <X size={18} /> <span>Fechar</span>
+      </motion.button>
+
       <motion.div
         /* Substituindo layoutId por animação de escala simples (MUITO mais leve) */
         initial={{ scale: 0.95, opacity: 0, y: 10 }}
@@ -55,18 +67,12 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
         className="glass relative w-full max-w-4xl rounded-3xl shadow-glow h-[92dvh] md:h-auto md:max-h-[90vh] overflow-y-auto overscroll-contain bg-zinc-900"
       >
-        <div className="flex items-start justify-between gap-3 border-b border-white/10 p-5 md:p-6">
+        {/* Cabeçalho que agora rola junto com o conteúdo */}
+        <div className="border-b border-white/10 p-5 md:p-6">
           <div>
             <div className="text-sm text-zinc-400">Case study</div>
             <div className="mt-1 text-xl font-semibold tracking-tight">{project.name}</div>
           </div>
-
-          <button
-            onClick={onClose}
-            className="btn-premium flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold text-zinc-200"
-          >
-            <X size={20} /> <span>Fechar</span>
-          </button>
         </div>
 
         <div className="grid gap-6 p-5 pb-8 md:grid-cols-12 md:p-6">

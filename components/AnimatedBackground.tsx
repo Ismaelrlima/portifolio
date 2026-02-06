@@ -24,6 +24,7 @@ export default function DataScienceBackground() {
     let vh = 0
 
     const lowPower = (() => {
+      if (typeof window === "undefined") return false
       const dm = (navigator as any).deviceMemory as number | undefined
       const cores = navigator.hardwareConcurrency || 0
       const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches
@@ -32,28 +33,31 @@ export default function DataScienceBackground() {
 
     const createNodes = (w: number, h: number) => {
       const isMobile = w < 768
-      const base = isMobile ? 40 : 65
+      // ✅ Partículas aumentadas
+      const base = isMobile ? 65 : 100 
       const count = lowPower ? Math.round(base * 0.7) : base
+
+      // Aumenta a velocidade no mobile (0.55) vs desktop (0.18)
+      const speed = isMobile ? 0.55 : 0.18
 
       nodes = Array.from({ length: count }).map(() => ({
         x: Math.random() * w,
         y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.18,
-        vy: (Math.random() - 0.5) * 0.18,
+        vx: (Math.random() - 0.5) * speed,
+        vy: (Math.random() - 0.5) * speed,
         type: Math.random() > 0.85 ? "hub" : "normal",
       }))
     }
 
     const resize = () => {
       const dpr = window.devicePixelRatio || 1
+      const w = window.innerWidth
+      
+      // ✅ FIX DEFINITIVO: Trava na altura da tela para não mexer no scroll
+      const h = w < 768 ? window.screen.height : window.innerHeight
 
-      // ✅ pega o tamanho REAL que o CSS está renderizando (100lvh + safe-area)
-      const rect = canvas.getBoundingClientRect()
-      const w = Math.max(1, Math.round(rect.width))
-      const h = Math.max(1, Math.round(rect.height))
-
-      // ✅ evita ficar recalculando por variações mínimas
-      if (Math.abs(w - vw) < 2 && Math.abs(h - vh) < 2) return
+      // Ignora redimensionamento se a largura não mudou (evita lag no scroll do iOS)
+      if (nodes.length > 0 && Math.abs(w - vw) < 10) return
 
       vw = w
       vh = h
@@ -96,7 +100,6 @@ export default function DataScienceBackground() {
 
       for (let i = 0; i < nodes.length; i++) {
         const a = nodes[i]
-
         a.x += a.vx
         a.y += a.vy
 
@@ -111,8 +114,7 @@ export default function DataScienceBackground() {
 
           const maxDist = a.type === "hub" || b.type === "hub" ? 170 : 120
           if (dist < maxDist) {
-            const alpha =
-              (1 - dist / maxDist) * (a.type === "hub" || b.type === "hub" ? 0.35 : 0.22)
+            const alpha = (1 - dist / maxDist) * (a.type === "hub" || b.type === "hub" ? 0.35 : 0.22)
             ctx.strokeStyle = `rgba(140, 160, 255, ${alpha})`
             ctx.lineWidth = a.type === "hub" || b.type === "hub" ? 1.3 : 1
             ctx.beginPath()
@@ -133,41 +135,23 @@ export default function DataScienceBackground() {
       frame = requestAnimationFrame(animate)
     }
 
-    // ✅ resize debounced
-    let t: number | null = null
-    const requestResize = () => {
-      if (t) window.clearTimeout(t)
-      t = window.setTimeout(resize, 60)
+    let t: any = null
+    const handleResize = () => {
+      if (t) clearTimeout(t)
+      t = setTimeout(resize, 250)
     }
 
-    // ✅ pega mudanças de viewport + barras do navegador
-    const vv = window.visualViewport
-    vv?.addEventListener("resize", requestResize)
-    vv?.addEventListener("scroll", requestResize)
-    window.addEventListener("resize", requestResize)
-    window.addEventListener("orientationchange", requestResize)
-    window.addEventListener("scroll", requestResize, { passive: true })
+    window.addEventListener("resize", handleResize)
+    window.addEventListener("orientationchange", handleResize)
 
-    // ✅ observa mudanças reais no tamanho do canvas (quando CSS recalcula lvh)
-    const ro = new ResizeObserver(() => requestResize())
-    ro.observe(canvas)
-
-    // init
     resize()
-    createNodes(vw, vh)
     frame = requestAnimationFrame(animate)
 
     return () => {
       cancelAnimationFrame(frame)
-      if (t) window.clearTimeout(t)
-
-      vv?.removeEventListener("resize", requestResize)
-      vv?.removeEventListener("scroll", requestResize)
-      window.removeEventListener("resize", requestResize)
-      window.removeEventListener("orientationchange", requestResize)
-      window.removeEventListener("scroll", requestResize)
-
-      ro.disconnect()
+      if (t) clearTimeout(t)
+      window.removeEventListener("resize", handleResize)
+      window.removeEventListener("orientationchange", handleResize)
     }
   }, [])
 
@@ -175,11 +159,17 @@ export default function DataScienceBackground() {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="fixed left-0 top-0 -z-10 w-[100vw]"
-      // ✅ 100lvh cobre inclusive a área “extra” quando as barras mudam
-      // ✅ safe-area garante iPhone com notch/home-indicator sem cortar
+      className="fixed inset-0 -z-10"
       style={{
-        height: "calc(100lvh + env(safe-area-inset-bottom))",
+        width: '100vw',
+        height: '100lvh', // Ocupa a altura total estável
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        pointerEvents: 'none',
+        backgroundColor: '#050816',
+        transform: 'translateZ(0)', // Mantém na camada de GPU
+        willChange: 'transform'
       }}
     />
   )

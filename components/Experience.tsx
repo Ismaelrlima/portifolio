@@ -11,7 +11,7 @@ export default function Experience() {
         <SectionTitle
           eyebrow="experiência"
           title="Histórico profissional"
-          subtitle="Atuação em varejo, automotivo e dados, com foco em BI, automação e geração de insights."
+          /*subtitle="Atuação em varejo, automotivo e dados, com foco em BI, automação e geração de insights."*/
         />
 
         <div className="mt-10 space-y-4">
