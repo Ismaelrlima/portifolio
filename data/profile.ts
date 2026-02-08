@@ -4,13 +4,13 @@ export const profile = {
   location: "linkedin.com/in/ismael-ribeiro-dos-santos-lima",
   phone: "(75) 98152-7109",
 
-  // ✅ WhatsApp (somente números com DDI +55)
+
   whatsapp: "5575981527109",
 
   email: "canais185@gmail.com",
   github: "https://github.com/Ismaelrlima?tab=repositories",
 
-  // ✅ LinkedIn
+
   linkedin: "https://www.linkedin.com/in/ismael-ribeiro-dos-santos-lima/",
 
   headline:
@@ -112,7 +112,7 @@ export const profile = {
       links: [{ label: "GitHub", href: "https://github.com/Ismaelrlima?tab=repositories" }]
     },*/
 
-    // ✅ NOVOS PROJETOS (links para posts do LinkedIn)
+
     {
       name: "Projeto Power BI – Meta Ads",
       image: "/projects/bimeta.jpeg",

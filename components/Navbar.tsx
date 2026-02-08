@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react"; // Instale com: npm install lucide-react
+import { Menu, X } from "lucide-react"; 
 
 const links = [
   { href: "#sobre", label: "Sobre" },
@@ -51,7 +51,7 @@ export default function Navbar() {
     };
   }, []);
 
-  // Fecha o menu mobile ao clicar em um link
+
   const closeMenu = () => setIsOpen(false);
 
   return (

@@ -7,11 +7,8 @@
 html {
   scroll-behavior: smooth !important;
   scroll-padding-top: 110px;
-  /* ✅ Previne redimensionamento da área visível no iOS */
   min-height: 100%;
   overflow-x: hidden;
-
-  /* ✅ Ajuda a manter o layout estável quando aparece/desaparece scrollbar (Chrome/Edge) */
   scrollbar-gutter: stable;
 }
 
@@ -21,24 +18,15 @@ body {
   background: #050816;
   min-height: 100vh;
   overflow-x: hidden;
-  /*-webkit-font-smoothing: antialiased;
-   ✅ Impede que o fundo "desgrude" no topo ou fundo do iOS */
   overscroll-behavior-y: auto;
   position: relative;
-
-  /* ✅ Scroll mais “inercial” no iOS */
   -webkit-overflow-scrolling: touch;
-
-  /* ✅ Pequenos ganhos de suavidade visual / menos “tranco” em repaints */
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  /* ✅ Melhora gesto/scroll em touch sem afetar desktop */
   touch-action: pan-y;
 }
 
-/* Garante que o canvas ignore qualquer movimento de rolagem */
 canvas {
   position: fixed !important;
   top: 0;
@@ -53,7 +41,7 @@ canvas {
 
 ::selection { background: rgba(99, 102, 241, 0.35); }
 
-/* --- Restante dos estilos mantidos --- */
+
 .bg-mesh {
   background:
     radial-gradient(900px 520px at 15% 18%, rgba(99,102,241,.22), transparent 58%),

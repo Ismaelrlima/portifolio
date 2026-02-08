@@ -33,11 +33,9 @@ export default function DataScienceBackground() {
 
     const createNodes = (w: number, h: number) => {
       const isMobile = w < 768
-      // ✅ Partículas aumentadas
       const base = isMobile ? 65 : 100 
       const count = lowPower ? Math.round(base * 0.7) : base
 
-      // Aumenta a velocidade no mobile (0.55) vs desktop (0.18)
       const speed = isMobile ? 0.55 : 0.18
 
       nodes = Array.from({ length: count }).map(() => ({
@@ -53,10 +51,9 @@ export default function DataScienceBackground() {
       const dpr = window.devicePixelRatio || 1
       const w = window.innerWidth
       
-      // ✅ FIX DEFINITIVO: Trava na altura da tela para não mexer no scroll
       const h = w < 768 ? window.screen.height : window.innerHeight
 
-      // Ignora redimensionamento se a largura não mudou (evita lag no scroll do iOS)
+
       if (nodes.length > 0 && Math.abs(w - vw) < 10) return
 
       vw = w

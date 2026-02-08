@@ -24,11 +24,9 @@ export default function About() {
         <SectionTitle
           eyebrow="Quem sou eu"
           title="Sobre mim" />
-        {/*subtitle="Um resumo direto de como eu trabalho e o que eu entrego."*/}
 
 
         <div className="mt-10 grid gap-10 md:grid-cols-12 md:items-center">
-          {/* FOTO - ESQUERDA (COLUNA 1-5) */}
           <div className="order-1 md:order-1 md:col-span-5">
             <Reveal delay={0.1}>
               <div className="relative mx-auto w-full max-w-[280px]">
@@ -52,13 +50,12 @@ export default function About() {
             </Reveal>
           </div>
 
-          {/* TEXTO - DIREITA (COLUNA 6-12) */}
           <div className="order-2 md:order-2 md:col-span-7">
             <Reveal>
               <div className="rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8 backdrop-blur">
                 <p className="text-sm leading-relaxed text-zinc-300 md:text-base">
                   <span className="text-zinc-100 font-semibold block">
-                    Olá, eu sou o Ismael! 👋
+                    Olá, eu sou o Ismael!!
                   </span>
 
                   <span className="block mt-4 text-zinc-300">
@@ -72,7 +69,6 @@ export default function About() {
                     maximizar receitas através de dados.
                   </span>
 
-                  {/* MESMA TONALIDADE DA PARTE DE CIMA */}
                   <span className="block mt-4 text-zinc-300">
                     Minha abordagem une o rigor técnico da Ciência de Dados com a
                     agilidade do Business Intelligence. Não apenas crio
@@ -103,7 +99,7 @@ export default function About() {
           </div>
         </div>
 
-        {/* SEÇÃO DE FORMAÇÃO (EDUCATION) */}
+
         <div className="mt-16 md:mt-24">
           <Reveal>
             <h3 className="mb-8 text-2xl font-bold text-zinc-100">

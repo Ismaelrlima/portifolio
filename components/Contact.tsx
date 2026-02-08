@@ -63,12 +63,8 @@ export default function Contact() {
                 whileTap={{ scale: 0.98 }}
                 className="btn-premium group relative block h-full overflow-hidden rounded-[1.5rem] border border-white/5 bg-white/[0.02] p-px transition-all duration-500"
               >
-                {/* Ajuste de altura: Removi p-6 do Card original (via CSS/Props se necessário) 
-                   ou forçando um padding menor aqui dentro 
-                */}
                 <Card>
                   <div className="relative z-10 flex items-center gap-4 py-1"> 
-                    {/* Ícone menor e alinhado à esquerda para economizar altura vertical */}
                     <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/5 text-zinc-400 transition-all duration-500 group-hover:bg-white/10 ${method.color}`}>
                       {method.icon}
                     </div>

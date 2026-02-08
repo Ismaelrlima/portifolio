@@ -41,13 +41,11 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
     >
-      {/* Backdrop com blur reduzido para performance */}
       <motion.div 
         className="absolute inset-0 bg-black/70 backdrop-blur-sm" 
         onClick={onClose}
       />
 
-      {/* Botão de fechar flutuante, posicionado em relação à tela inteira */}
       <motion.button
         onClick={onClose}
         aria-label="Fechar modal"
@@ -60,14 +58,13 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
       </motion.button>
 
       <motion.div
-        /* Substituindo layoutId por animação de escala simples (MUITO mais leve) */
         initial={{ scale: 0.95, opacity: 0, y: 10 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.95, opacity: 0, y: 10 }}
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
         className="glass relative w-full max-w-4xl rounded-3xl shadow-glow h-[92dvh] md:h-auto md:max-h-[90vh] overflow-y-auto overscroll-contain bg-zinc-900"
       >
-        {/* Cabeçalho que agora rola junto com o conteúdo */}
+
         <div className="border-b border-white/10 p-5 md:p-6">
           <div>
             <div className="text-sm text-zinc-400">Case study</div>

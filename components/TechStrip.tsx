@@ -49,11 +49,10 @@ export default function TechStrip() {
       </div>
 
       <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-white/5">
-        {/* ✅ OTIMIZAÇÃO: will-change-transform aplicado aqui */}
         <motion.div
           className="flex gap-6 px-5 py-4 will-change-transform"
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 30, ease: "linear", repeat: Infinity }} // Aumentei um pouco a duração para ser mais suave
+          transition={{ duration: 30, ease: "linear", repeat: Infinity }}
         >
           {[...techs, ...techs].map((t, idx) => (
             <div key={`${t.name}-${idx}`} className="group flex items-center gap-2 flex-shrink-0">

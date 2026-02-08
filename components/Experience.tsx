@@ -11,7 +11,6 @@ export default function Experience() {
         <SectionTitle
           eyebrow="experiência"
           title="Histórico profissional"
-          /*subtitle="Atuação em varejo, automotivo e dados, com foco em BI, automação e geração de insights."*/
         />
 
         <div className="mt-10 space-y-4">
@@ -20,17 +19,15 @@ export default function Experience() {
               <Card>
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
-                    {/* ✅ Corrigido: era xp.role, mas no seu profile é xp.title */}
-                    <div className="text-base font-semibold">{xp.title}</div>
 
+                    <div className="text-base font-semibold">{xp.title}</div>
                     <div className="mt-1 text-sm text-zinc-300">
                       {xp.company}
-                      {/* ✅ Mostra o place apenas se existir */}
                       {xp.place ? <span className="text-zinc-500"> • {xp.place}</span> : null}
                     </div>
                   </div>
 
-                  {/* ✅ Mantém o período/datas */}
+
                   <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-zinc-200">
                     {xp.period}
                   </div>

@@ -14,7 +14,6 @@ export default function Skills() {
         <SectionTitle
           eyebrow="skills"
           title="Tecnologias e competências"
-          /*subtitle="Stack principal em destaque (logos), e abaixo os grupos de skills de forma objetiva."*/
         />
 
         <Reveal>

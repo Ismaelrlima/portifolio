@@ -17,7 +17,6 @@ export default function Page() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Bloqueia o scroll enquanto carrega para evitar bugs de posição
     document.body.style.overflow = isLoading ? "hidden" : "auto";
   }, [isLoading]);
 
@@ -27,9 +26,6 @@ export default function Page() {
         {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
 
-      {/* Renderizamos o conteúdo sempre, mas controlamos a visibilidade inicial 
-         para o navegador já ir processando o layout por baixo do loader.
-      */}
       <div className={isLoading ? "invisible min-h-[100dvh] overflow-hidden" : "visible"}>
         <Navbar />
         <Hero />

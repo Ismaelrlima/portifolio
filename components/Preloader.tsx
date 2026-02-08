@@ -20,7 +20,6 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
     // Gerenciador do contador
     const timer = setInterval(() => {
       setCount((prev) => {
-        // Se ainda não carregou totalmente, trava em 99%
         if (prev >= 99 && !isFullyLoaded) return 99;
         if (prev >= 100) {
           clearInterval(timer);
