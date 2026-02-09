@@ -28,7 +28,7 @@ export const profile = {
     "Ciência de Dados & ML": ["Scikit-learn", "Modelagem Preditiva", "Estatística", "Regressão/Classificação"],
     "BI & Analytics": ["Power BI", "KPIs", "Dashboards", "Storytelling"],
     "Engenharia/Automação": ["ETL", "APIs", "Pipelines", "n8n", "SQLAlchemy", "Apache Airflow", "Jenkins (CI/CD)", "PySpark"],
-    "Dev & Colaboração": ["Git/GitHub", "Jupyter Notebooks", "Documentação"]
+    "Dev & Colaboração": ["Git/GitHub", "Jupyter Notebooks", "Docker", "GCP"]
   },
   experience: [
     {
