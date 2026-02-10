@@ -112,10 +112,27 @@ export const profile = {
       links: [{ label: "GitHub", href: "https://github.com/Ismaelrlima?tab=repositories" }]
     },*/
 
+    {
+  name: "Meta Ads ETL + Banco + BI (Analytics Engineering)",
+  image: "/projects/etlmeta.png",
+  tags: ["Python", "ETL", "PostgreSQL", "Jenkins", "BI"],
+  description:
+    "Pipeline end-to-end que extrai dados da API do Meta, transforma e carrega em banco relacional para consumo em dashboards de BI.",
+  problem:
+    "Dados de performance (Facebook/Instagram Ads) dispersos e com atualização manual, dificultando análises históricas e acompanhamento diário de KPIs.",
+  solution:
+    "ETL em Python consumindo a API do Meta, padronizando e persistindo os dados em banco relacional. O processo é automatizado com Jenkins (execução diária) e a camada analítica alimenta dashboards no BI.",
+  impact:
+    "Dados confiáveis e atualizados diariamente, análises históricas consistentes e dashboards de performance para tomada de decisão mais rápida e orientada por dados.",
+  links: [
+    { label: "GitHub", href: "https://github.com/Ismaelrlima/Projeto-de-ETL-com-api-do-meta/tree/main" }
+    // { label: "Dashboard (BI)", href: "https://link-do-dashboard-ou-portfolio" }
+  ]
+},
 
     {
       name: "Projeto Power BI – Meta Ads",
-      image: "/projects/bimeta.jpeg",
+      image: "/projects/bimeta.png",
       tags: ["Dados", "Power BI", "ETL", "Python", "SQL", "API", "CI/CD"],
       description: "Dashboard analítico automatizado para monitoramento de performance de campanhas no Meta Ads.",
       problem: "Necessidade de unificar dados de múltiplas fontes e garantir análises rápidas, confiáveis e contínuas para tomada de decisão em marketing.",
