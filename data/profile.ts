@@ -113,22 +113,40 @@ export const profile = {
     },*/
 
     {
-  name: "Meta Ads ETL + Banco + BI (Analytics Engineering)",
-  image: "/projects/etlmeta.png",
-  tags: ["Python", "ETL", "PostgreSQL", "Jenkins", "BI"],
-  description:
-    "Pipeline end-to-end que extrai dados da API do Meta, transforma e carrega em banco relacional para consumo em dashboards de BI.",
-  problem:
-    "Dados de performance (Facebook/Instagram Ads) dispersos e com atualização manual, dificultando análises históricas e acompanhamento diário de KPIs.",
-  solution:
-    "ETL em Python consumindo a API do Meta, padronizando e persistindo os dados em banco relacional. O processo é automatizado com Jenkins (execução diária) e a camada analítica alimenta dashboards no BI.",
-  impact:
-    "Dados confiáveis e atualizados diariamente, análises históricas consistentes e dashboards de performance para tomada de decisão mais rápida e orientada por dados.",
-  links: [
-    { label: "GitHub", href: "https://github.com/Ismaelrlima/Projeto-de-ETL-com-api-do-meta/tree/main" }
-    // { label: "Dashboard (BI)", href: "https://link-do-dashboard-ou-portfolio" }
-  ]
-},
+      name: "Enterprise Data Warehouse Pipeline (Consórcio)",
+      image: "/projects/medallion.png",
+      tags: ["Python", "Data Engineering", "PostgreSQL", "Docker", "Dimensional Modeling"],
+      description:
+        "Pipeline de Engenharia de Dados com arquitetura Bronze-Silver-Gold, responsável por ingestão, transformação e modelagem dimensional de dados para ambiente analítico corporativo.",
+      problem:
+        "Dados operacionais de vendas de consórcio não estavam estruturados para análise histórica, dificultando consolidação de métricas, rastreabilidade e reprocessamento seguro das cargas.",
+      solution:
+        "Desenvolvimento de pipeline em Python com separação em camadas (Bronze, Silver e Gold), aplicação de padronização e tratamento de dados, geração de hash para idempotência e modelagem dimensional em Star Schema. A carga é realizada em PostgreSQL com execução containerizada via Docker.",
+      impact:
+        "Estruturação de um Data Warehouse analítico consistente, com controle de duplicidade, separação clara de responsabilidades e base preparada para evolução para cargas incrementais e governança de dados.",
+      links: [
+        { label: "GitHub", href: "https://github.com/Ismaelrlima/consorcio-enterprise-data-warehouse" }
+      ]
+    },
+
+
+    {
+      name: "Meta Ads ETL + Banco + BI (Analytics Engineering)",
+      image: "/projects/etlmeta.png",
+      tags: ["Python", "ETL", "PostgreSQL", "Jenkins", "BI"],
+      description:
+        "Pipeline end-to-end que extrai dados da API do Meta, transforma e carrega em banco relacional para consumo em dashboards de BI.",
+      problem:
+        "Dados de performance (Facebook/Instagram Ads) dispersos e com atualização manual, dificultando análises históricas e acompanhamento diário de KPIs.",
+      solution:
+        "ETL em Python consumindo a API do Meta, padronizando e persistindo os dados em banco relacional. O processo é automatizado com Jenkins (execução diária) e a camada analítica alimenta dashboards no BI.",
+      impact:
+        "Dados confiáveis e atualizados diariamente, análises históricas consistentes e dashboards de performance para tomada de decisão mais rápida e orientada por dados.",
+      links: [
+        { label: "GitHub", href: "https://github.com/Ismaelrlima/Projeto-de-ETL-com-api-do-meta/tree/main" }
+        // { label: "Dashboard (BI)", href: "https://link-do-dashboard-ou-portfolio" }
+      ]
+    },
 
     {
       name: "Projeto Power BI – Meta Ads",
